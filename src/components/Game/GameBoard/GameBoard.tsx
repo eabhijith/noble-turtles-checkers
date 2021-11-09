@@ -5,7 +5,9 @@ import Row from './Row';
 
 //Game Board Props Interface
 interface GameBoardProps {
-	updateCurrentPlayer : any
+	updateCurrentPlayer : any,
+	player1 : string,
+    player2: string
 }
 //Game Board State Interface
 export interface GameBoardState {
@@ -45,7 +47,7 @@ export default class GameBoard extends Component<GameBoardProps,GameBoardState> 
 				{this.state.winnerDecission ? 
                 (<div className="notification is-success">
                 <button className="delete"></button>
-                        Congratulations 🎉 🎉 🎉 🎉!! <strong>{this.state.activePlayer} has won!!</strong>
+                        Congratulations 🎉 🎉 🎉 🎉!! <strong>{this.state.activePlayer === 'w' ? this.props.player1 : this.props.player2} has won!!</strong>
                 </div>)
 				:''}
 			    <div className="nt-board-container">

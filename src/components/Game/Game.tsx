@@ -63,7 +63,7 @@ export default class Game extends Component<GameProps,GameState> {
                 </div>
                 <div className="tile is-parent is-10">
                     <article className="tile is-child notification">
-                        <GameBoard updateCurrentPlayer={this.updateCurrentPlayer}/>
+                        <GameBoard player1={this.props.player1} player2={this.props.player2} updateCurrentPlayer={this.updateCurrentPlayer}/>
                     </article>
                 </div>
   
