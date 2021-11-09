@@ -3,6 +3,9 @@
 ## Project Description
 Simple Checkers Application build on [React](https://github.com/facebook/create-react-app) with an [electron](https://github.com/electron/electron) distributable
 
+## Online Version:
+Online version of the module can be found [here](https://noble-turtles-checkers.vercel.app/)
+
 ## To Begin:
 
 1. **Clone the repo**
