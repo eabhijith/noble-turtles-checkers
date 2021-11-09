@@ -57,15 +57,18 @@
 	 background-color: #444;
 }
  .cell.cell-b.k .gamePiece:after {
-	 background-color: #444;
+	 background-color: hsl(44deg 4% 36%);
 	 border: 1px solid white;
+	 margin-top: 0.3rem;
+
 }
  .cell.cell-w .gamePiece {
 	 background-color: #e26b6b;
 }
  .cell.cell-w.k .gamePiece:after {
-	 background-color: #e26b6b;
+	 background-color: hsl(16, 65%, 52%);
 	 border: 1px solid white;
+	 margin-top: 0.3rem;
 }
  .cell.cell-ab .gamePiece, .cell.cell-aw .gamePiece {
 	 background-color: #6a6aff;
