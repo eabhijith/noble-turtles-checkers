@@ -26,7 +26,7 @@ export default class Game extends Component<GameProps,GameState> {
 	}
 
     public updateCurrentPlayer(gameBoardState : GameBoardState) : void {
-        let currentPlayer = gameBoardState.activePlayer === 'r' ? this.props.player1 : this.props.player2;
+        let currentPlayer = gameBoardState.activePlayer === 'w' ? this.props.player1 : this.props.player2;
         this.setState({currentPlayer});
     }
 
