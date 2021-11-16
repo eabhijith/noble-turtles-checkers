@@ -98,6 +98,7 @@ export default class Home extends Component<HomeProps,HomeState> {
                 <Button className="button is-primary is-info is-fullwidth" onClick={this.toggleRules} id="homepage-start-button">Rules</Button>
             </div>
             <Login/>
+            change...
             {this.state.displayRules ? ((<Rules toggleRules={this.toggleRules}></Rules>)) : ''}
             {this.state.displayToplay ? ((<ToPlay navigateToGame={this.navigateToGame} toggleToPlay={this.toggleToPlay}></ToPlay>)) : ''}
             {this.state.startGame ? ((<Game player1={this.state.player1} player2={this.state.player2}></Game>)) : ''}
