@@ -1,4 +1,4 @@
-import React, { Component, CSSProperties } from "react";
+import { Component} from "react";
 import 'bulma/css/bulma.min.css';
 
 

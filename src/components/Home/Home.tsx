@@ -7,7 +7,7 @@ import ToPlay from "../ToPlay/ToPlay";
 import Game from "../Game/Game";
 import Login from "../UserAuth/Login"
 import {ToPlayState} from '../ToPlay/ToPlay'
-import app from '../../configs/firebase'
+// import app from '../../configs/firebase'
 
 //Home Props Interface
 interface HomeProps {}
