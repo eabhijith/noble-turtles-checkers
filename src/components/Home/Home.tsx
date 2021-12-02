@@ -7,6 +7,7 @@ import ToPlay from "../ToPlay/ToPlay";
 import Game from "../Game/Game";
 import {ToPlayState} from '../ToPlay/ToPlay'
 // import app from '../../configs/firebase'
+import Header from "./Header/Header";
 
 //Home Props Interface
 interface HomeProps {}
@@ -84,6 +85,7 @@ export default class Home extends Component<HomeProps,HomeState> {
     public render(): JSX.Element {
         return (
             <div className="box">
+                <Header/>
             <div className="block">
                 <p className="title is-1 is-spaced ">Hey There Welcome to <strong>American Checkers!!</strong>.</p>
             </div>
@@ -96,7 +98,6 @@ export default class Home extends Component<HomeProps,HomeState> {
                 
                 <Button className="button is-primary is-info is-fullwidth" onClick={this.toggleRules} id="homepage-start-button">Rules</Button>
             </div>
-            change...
             {this.state.displayRules ? ((<Rules toggleRules={this.toggleRules}></Rules>)) : ''}
             {this.state.displayToplay ? ((<ToPlay navigateToGame={this.navigateToGame} toggleToPlay={this.toggleToPlay}></ToPlay>)) : ''}
             {this.state.startGame ? ((<Game player1={this.state.player1} player2={this.state.player2}></Game>)) : ''}
