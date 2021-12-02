@@ -5,7 +5,6 @@ import { Button } from 'react-bulma-components';
 import Rules from "../Rules/Rules";
 import ToPlay from "../ToPlay/ToPlay";
 import Game from "../Game/Game";
-import Login from "../UserAuth/Login"
 import {ToPlayState} from '../ToPlay/ToPlay'
 // import app from '../../configs/firebase'
 
@@ -97,7 +96,6 @@ export default class Home extends Component<HomeProps,HomeState> {
                 
                 <Button className="button is-primary is-info is-fullwidth" onClick={this.toggleRules} id="homepage-start-button">Rules</Button>
             </div>
-            <Login/>
             change...
             {this.state.displayRules ? ((<Rules toggleRules={this.toggleRules}></Rules>)) : ''}
             {this.state.displayToplay ? ((<ToPlay navigateToGame={this.navigateToGame} toggleToPlay={this.toggleToPlay}></ToPlay>)) : ''}
