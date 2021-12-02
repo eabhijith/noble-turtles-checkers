@@ -7,7 +7,7 @@ import ToPlay from "../ToPlay/ToPlay";
 import Game from "../Game/Game";
 import {ToPlayState} from '../ToPlay/ToPlay'
 // import app from '../../configs/firebase'
-import Header from "./Header/Header";
+import Header from "../Header/Header";
 
 //Home Props Interface
 interface HomeProps {}
@@ -85,7 +85,7 @@ export default class Home extends Component<HomeProps,HomeState> {
     public render(): JSX.Element {
         return (
             <div className="box">
-                <Header/>
+                <Header toggleRules={this.toggleRules} toggleToPlay={this.toggleToPlay}/>
             <div className="block">
                 <p className="title is-1 is-spaced ">Hey There Welcome to <strong>American Checkers!!</strong>.</p>
             </div>

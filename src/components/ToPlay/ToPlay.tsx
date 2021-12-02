@@ -78,6 +78,7 @@ export default class ToPlay extends Component<ToPlayProps,ToPlayState> {
                         value={this.state.firstPlayer}
                         onChange={this.handlePlayer1Change}
                         />
+                        
                         </div>
                         </div>
                     </div>
@@ -91,6 +92,8 @@ export default class ToPlay extends Component<ToPlayProps,ToPlayState> {
                         value={this.state.secondPlayer}
                         onChange={this.handlePlayer2Change}
                         />
+                        <input id="switchColorSuccess" type="checkbox" name="switchColorSuccess" className="switch is-rounded" />
+                        <label >Play with Bot</label>
                         </div>
                         </div>
                     </div>
