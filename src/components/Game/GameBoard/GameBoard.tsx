@@ -47,6 +47,9 @@ export default class GameBoard extends Component<GameBoardProps,GameBoardState> 
 	public render(): JSX.Element {
 		return (
             <div>
+				<div className="buttons">
+                    <button className="button is-link" onClick={this.reset}>Rest Game</button>
+                </div>
 				{this.state.winnerDecission ? 
                 (<div className="notification is-success">
                 <button className="delete"></button>
@@ -63,7 +66,6 @@ export default class GameBoard extends Component<GameBoardProps,GameBoardState> 
             </div>
 		);
 	}
-
     
 
 	public handlePieceClick(e:any) : void {
@@ -436,6 +438,8 @@ export default class GameBoard extends Component<GameBoardProps,GameBoardState> 
         	],
 			activePlayer: 'w'
 		});
+		this.state.activePlayer = 'w';
+		this.props.updateCurrentPlayer(this.state);
 	}
 	
 	cloneBoard(board:any) : any{
