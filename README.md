@@ -7,10 +7,6 @@ Simple Checkers Application build on [React](https://github.com/facebook/create-
 Online version of the module can be found [here](https://noble-turtles-checkers.web.app/home)
 
 
-## Online Version: ** OLD VERSION (DEPRRICATED) **
-Online version of the module can be found [here](https://noble-turtles-checkers.vercel.app/)
-
-
 ## To Begin:
 
 1. **Clone the repo**
