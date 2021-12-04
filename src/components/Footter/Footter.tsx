@@ -15,9 +15,8 @@ export default class  Footter extends Component<FootterProps,FootterState> {
             <footer className="footer">
                 <div className="content has-text-centered">
                     <p>
-                    <strong>© {new Date().getFullYear()} Noble-Turtles-Checkers</strong> The source code is a student project
-                    <a href="https://github.com/eabhijith/noble-turtles-checkers"> Source Code</a>.
-                    
+                    <strong>© {new Date().getFullYear()} Noble-Turtles-Checkers</strong> 
+                    The <a href="https://github.com/eabhijith/noble-turtles-checkers"> Source Code</a>. is a student project
                     </p>
                 </div>
             </footer>
