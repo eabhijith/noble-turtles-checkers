@@ -14,13 +14,6 @@ interface HeaderState {
 
 export default class  Header extends Component<HeaderProps,HeaderState> {
 
-  //Constructor for Home Page
-    constructor(props : HeaderProps) {
-        super(props);
-        // this.toggleRules = this.toggleRules.bind(this);
-        // this.toggleToPlay = this.toggleToPlay.bind(this);
-        // this.toggleRules = this.toggleRules.bind(this);
-    }
 
     //Define State on To Play Page
     public readonly state: HeaderState = {

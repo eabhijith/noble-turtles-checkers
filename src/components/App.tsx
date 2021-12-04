@@ -3,6 +3,8 @@ import React from "react";
 import { Redirect, Route} from "react-router-dom";
 import Home from "./Home/Home";
 import Game from "./Game/Game"
+import Footter from "../components/Footter/Footter";
+
 
 
 export default class App extends React.Component {
@@ -17,6 +19,7 @@ export default class App extends React.Component {
         </Route>
         <Redirect from="*" to="/home"></Redirect>
       </switch>
+      <Footter/>
       </div>
     );
   }
