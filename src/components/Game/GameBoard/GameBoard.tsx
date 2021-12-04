@@ -7,14 +7,16 @@ import Row from './Row';
 interface GameBoardProps {
 	updateCurrentPlayer : any,
 	player1 : string,
-    player2: string
+    player2: string,
+	playWithBot : boolean
 }
 //Game Board State Interface
 export interface GameBoardState {
-    board: any;
-    activePlayer: string;
-    continueTurn: boolean;
-	winnerDecission : boolean;
+    board: any,
+    activePlayer: string,
+    continueTurn: boolean,
+	winnerDecission : boolean,
+	count : number
     // gameState : string;
 }
 
@@ -33,6 +35,7 @@ export default class GameBoard extends Component<GameBoardProps,GameBoardState> 
         activePlayer: 'w',
         continueTurn : false,
 		winnerDecission : false,
+		count : 0
 	};
 
     constructor(props: GameBoardProps) {
@@ -87,6 +90,10 @@ export default class GameBoard extends Component<GameBoardProps,GameBoardState> 
 			else {
 				this.state.activePlayer = (this.state.activePlayer == 'w' ? 'b' : 'w');
 				this.props.updateCurrentPlayer(this.state);
+				//Min-Max Logic in Progress if bot is enabled
+				if (this.state.activePlayer == 'b' && this.props.playWithBot) {
+					setTimeout(() => this.minMax(), 50);
+				}
 			}
 		}
 		this.setState(this.state);
@@ -256,6 +263,160 @@ export default class GameBoard extends Component<GameBoardProps,GameBoardState> 
 		return result;
 	}
 
+	public minMax() : void {
+		//prep a branching future prediction
+		this.state.count = 0;
+		var decisionTree = this.mixMaxBranch(this.state.board, this.state.activePlayer, 1);
+		if (decisionTree.length > 0) {
+			console.log(decisionTree[0]);
+			setTimeout(() => {
+				this.handlePieceClick({
+					target:{
+						attributes:{
+							'data-row':{
+								nodeValue:decisionTree[0].piece.targetRow
+							},
+							'data-col':{
+								nodeValue:decisionTree[0].piece.targetCell
+							}
+						}
+					}
+				});
+
+				setTimeout(() => {
+					this.handlePieceClick({
+						target:{
+							attributes:{
+								'data-row':{
+									nodeValue:decisionTree[0].move.targetRow
+								},
+								'data-col':{
+									nodeValue:decisionTree[0].move.targetCell
+								}
+							}
+						}
+					});
+				}, 1000);
+			}, 750);
+		}
+		else {
+			alert('no moves, you win!');
+		}
+	}
+
+	public mixMaxBranch(virtualBoard:any, activePlayer:any, depth:any) : any {
+		this.state.count++;
+		let output = [];
+		for (let i = 0; i < virtualBoard.length; i++) {
+			for (let j = 0; j < virtualBoard[i].length; j++) {
+				if (virtualBoard[i][j].indexOf(activePlayer) > -1) {
+					var possibleMoves = this.calculateAllPossibleMoves(i, j, virtualBoard, activePlayer);
+					for (let k = 0; k < possibleMoves.length; k++) {
+						let tempBoard = this.cloneBoard(virtualBoard);
+                    	tempBoard[i][j] = 'a'+tempBoard[i][j];
+
+						let buildHighlightTag = 'h ';
+						for (let m = 0; m < possibleMoves[k].wouldDelete.length; m++) {
+							buildHighlightTag += 'd'+String(possibleMoves[k].wouldDelete[m].targetRow) + String(possibleMoves[k].wouldDelete[m].targetCell)+' ';
+						}
+						tempBoard[possibleMoves[k].targetRow][possibleMoves[k].targetCell] = buildHighlightTag;
+
+						let buildingObject = {
+							piece: {targetRow: i, targetCell: j},
+							move:possibleMoves[k],
+							board:this.executeMove(possibleMoves[k].targetRow, possibleMoves[k].targetCell, tempBoard, activePlayer),
+							terminal: null,
+							children:[],
+							score:0,
+							activePlayer: activePlayer,
+							depth: depth,
+						}
+						//does that move win the game?
+						buildingObject.terminal = this.winDetection(buildingObject.board, activePlayer);						
+
+						if (buildingObject.terminal) {
+							//console.log('a terminal move was found');
+							//if terminal, score is easy, just depends on who won
+							if (activePlayer == this.state.activePlayer) {
+								buildingObject.score = 100-depth;
+							}
+							else {
+								buildingObject.score = -100-depth;
+							}
+						}
+						else if(depth > 1) {
+							//don't want to blow up the call stack boiiiiii
+							buildingObject.score = 0;
+						}
+						else {	
+							buildingObject.children = this.mixMaxBranch(buildingObject.board, (activePlayer == 'r' ? 'b' : 'r'), depth+1);
+							//if not terminal, we want the best score from this route (or worst depending on who won)							
+							var scoreHolder :Array<number> = [];
+
+					        for (var l = 0; l < buildingObject.children.length; l++) {
+					        	if (typeof buildingObject.children[l]['score'] !== 'undefined'){
+					        		scoreHolder.push(buildingObject.children[l]['score']);
+					        	}
+					        }
+
+					        scoreHolder.sort(function(a,b){ if (a > b) return -1; if (a < b) return 1; return 0; });
+
+					        if (scoreHolder.length > 0) {
+						        if (activePlayer == this.state.activePlayer) {
+									buildingObject.score = scoreHolder[scoreHolder.length-1];
+								}
+								else {
+									buildingObject.score = scoreHolder[0];
+								}
+							}
+							else {
+								if (activePlayer == this.state.activePlayer) {
+									buildingObject.score = 100-depth;
+								}
+								else {
+									buildingObject.score = -100-depth;
+								}
+							}
+						}
+						if (activePlayer == this.state.activePlayer) {
+							for (var n = 0; n < buildingObject.move.wouldDelete.length; n++) {
+								if (virtualBoard[buildingObject.move.wouldDelete[n].targetRow][buildingObject.move.wouldDelete[n].targetCell].indexOf('k') > -1) {
+									buildingObject.score+=(25-depth);
+								}
+								else {
+									buildingObject.score+=(10-depth);
+								}
+							}
+							if ((JSON.stringify(virtualBoard).match(/k/g) || []).length < (JSON.stringify(buildingObject.board).match(/k/g) || []).length) {
+								//new king made after this move
+								buildingObject.score+=(15-depth);
+							}
+						}
+						else {
+							for (var n = 0; n < buildingObject.move.wouldDelete.length; n++) {
+								if (virtualBoard[buildingObject.move.wouldDelete[n].targetRow][buildingObject.move.wouldDelete[n].targetCell].indexOf('k') > -1) {
+									buildingObject.score-=(25-depth);
+								}
+								else {
+									buildingObject.score-=(10-depth);
+								}
+							}							
+							if ((JSON.stringify(virtualBoard).match(/k/g) || []).length < (JSON.stringify(buildingObject.board).match(/k/g) || []).length) {
+								//new king made after this move
+								buildingObject.score-=(15-depth);
+							}
+						}
+						buildingObject.score+=buildingObject.move.wouldDelete.length;
+						output.push(buildingObject);
+					}
+				}
+			}
+		}
+		
+		output = output.sort(function(a,b){ if (a.score > b.score) return -1; if (a.score < b.score) return 1; return 0; });
+		return output;
+	}
+
 	/** 
      * Method name : reset()
      * Pre-Condtion : this?.state <> null
@@ -282,4 +443,6 @@ export default class GameBoard extends Component<GameBoardProps,GameBoardState> 
         for (var i = 0; i < board.length; i++) output.push(board[i].slice(0));
         return output;
     }
+
+
 }

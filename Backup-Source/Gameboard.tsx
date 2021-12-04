@@ -68,7 +68,7 @@ export default class GameBoard extends Component<GameBoardProps,GameBoardState> 
 
 	public handlePieceClick(e:any) : void {
 		var rowIndex = parseInt(e.target.attributes['data-row'].nodeValue);
-		var cellIndex = parseInt(e.target.attributes['data-cell'].nodeValue);
+		var cellIndex = parseInt(e.target.attributes['data-col'].nodeValue);
 		if (this.state.board[rowIndex][cellIndex].indexOf(this.state.activePlayer) > -1) {
 			//this is triggered if the piece that was clicked on is one of the player's own pieces, it activates it and highlights possible moves
 			this.state.board = this.state.board.map(function(row:any){return row.map(function(cell:any){return cell.replace('a', '')});}); //un-activate any previously activated pieces
@@ -298,7 +298,7 @@ export default class GameBoard extends Component<GameBoardProps,GameBoardState> 
 							'data-row':{
 								nodeValue:decisionTree[0].piece.targetRow
 							},
-							'data-cell':{
+							'data-col':{
 								nodeValue:decisionTree[0].piece.targetCell
 							}
 						}
@@ -312,7 +312,7 @@ export default class GameBoard extends Component<GameBoardProps,GameBoardState> 
 								'data-row':{
 									nodeValue:decisionTree[0].move.targetRow
 								},
-								'data-cell':{
+								'data-col':{
 									nodeValue:decisionTree[0].move.targetCell
 								}
 							}

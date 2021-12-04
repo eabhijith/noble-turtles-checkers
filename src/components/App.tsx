@@ -15,7 +15,7 @@ export default class App extends React.Component {
       <switch>
         <Route path="/home"><Home/></Route>
         <Route path="/game">
-          <Game player1 ='first' player2='second'/>
+          <Game player1 ='first' player2='second' playWithBot/>
         </Route>
         <Redirect from="*" to="/home"></Redirect>
       </switch>

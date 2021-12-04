@@ -12,6 +12,7 @@ interface ToPlayProps {
 export interface ToPlayState {
   firstPlayer : string;
   secondPlayer : string;
+  playWithBot : boolean;
 }
 
 export default class ToPlay extends Component<ToPlayProps,ToPlayState> {
@@ -21,13 +22,15 @@ export default class ToPlay extends Component<ToPlayProps,ToPlayState> {
         super(props);  
         this.handlePlayer2Change = this.handlePlayer2Change.bind(this);
         this.handlePlayer1Change = this.handlePlayer1Change.bind(this);
+        this.handlePlayWithBot = this.handlePlayWithBot.bind(this);
     }
 
 
     //Define State on To Play Page
     public readonly state: ToPlayState = {
         firstPlayer : 'Player 1',
-        secondPlayer : 'Player 2'
+        secondPlayer : 'Player 2',
+        playWithBot : false
 	  }
 
     /** 
@@ -46,6 +49,15 @@ export default class ToPlay extends Component<ToPlayProps,ToPlayState> {
      **/
     private handlePlayer1Change(event:any) : void {
       this.setState({firstPlayer: event.target.value});
+    }
+
+    /** 
+     * Method name : handlePlayWithBot()
+     * Pre-Condtion : event <> null && event.target.value <> ''
+     * Post-Condtion : this.state.playWithBot = event.target.value
+     **/
+    private handlePlayWithBot(event:any) : void {
+      this.setState({playWithBot: event.target.value});
     }
 
     /** 
@@ -92,8 +104,8 @@ export default class ToPlay extends Component<ToPlayProps,ToPlayState> {
                         value={this.state.secondPlayer}
                         onChange={this.handlePlayer2Change}
                         />
-                        <input id="switchColorSuccess" type="checkbox" name="switchColorSuccess" className="switch is-rounded" />
-                        <label >Play with Bot</label>
+                        <input id="switchColorSuccess" onChange={this.handlePlayWithBot} checked={this.state.playWithBot} type="checkbox" name="switchColorSuccess" className="switch is-rounded" />
+                        &nbsp;<label >Play with Bot</label>
                         </div>
                         </div>
                     </div>

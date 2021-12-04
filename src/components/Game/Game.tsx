@@ -6,7 +6,8 @@ import GameBoard,{GameBoardState} from './GameBoard/GameBoard';
 interface GameProps {
     toggleToPlay?: boolean;
     player1 : string,
-    player2: string
+    player2: string,
+    playWithBot : boolean
 }
 
 interface GameState {
@@ -63,7 +64,7 @@ export default class Game extends Component<GameProps,GameState> {
                 </div>
                 <div className="tile is-parent is-10">
                     <article className="tile is-child notification">
-                        <GameBoard player1={this.props.player1} player2={this.props.player2} updateCurrentPlayer={this.updateCurrentPlayer}/>
+                        <GameBoard player1={this.props.player1} player2={this.props.player2} playWithBot={this.props.playWithBot} updateCurrentPlayer={this.updateCurrentPlayer}/>
                     </article>
                 </div>
   

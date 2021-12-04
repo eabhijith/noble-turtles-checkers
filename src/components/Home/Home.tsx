@@ -18,7 +18,8 @@ interface HomeState {
     displayToplay: boolean,
     startGame : boolean,
     player1 : string,
-    player2: string
+    player2: string,
+    playWithBot : boolean
 }
 
 /** 
@@ -40,7 +41,8 @@ export default class Home extends Component<HomeProps,HomeState> {
         displayToplay: false,
         startGame : false,
         player1 : 'Player 1',
-        player2 : 'Player 2'
+        player2 : 'Player 2',
+        playWithBot : false
 	}
 
     /** 
@@ -71,8 +73,9 @@ export default class Home extends Component<HomeProps,HomeState> {
         let player1  = state.firstPlayer,
             player2 = state.secondPlayer,
             displayToplay = !this.state.displayToplay,
-            startGame = !this.state.startGame;
-        this.setState({player1,player2,displayToplay,startGame});
+            startGame = !this.state.startGame,
+            playWithBot = state.playWithBot;
+        this.setState({player1,player2,displayToplay,startGame,playWithBot});
         // this.setState({ displayToplay: !this.state.displayToplay });
         // this.setState({ startGame: !this.state.startGame });
     }
@@ -100,7 +103,7 @@ export default class Home extends Component<HomeProps,HomeState> {
             </div>
             {this.state.displayRules ? ((<Rules toggleRules={this.toggleRules}></Rules>)) : ''}
             {this.state.displayToplay ? ((<ToPlay navigateToGame={this.navigateToGame} toggleToPlay={this.toggleToPlay}></ToPlay>)) : ''}
-            {this.state.startGame ? ((<Game player1={this.state.player1} player2={this.state.player2}></Game>)) : ''}
+            {this.state.startGame ? ((<Game player1={this.state.player1} player2={this.state.player2} playWithBot={this.state.playWithBot}></Game>)) : ''}
             </div>
         )
     }   
