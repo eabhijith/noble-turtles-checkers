@@ -43,6 +43,12 @@ Online version of the module can be found [here](https://noble-turtles-checkers.
 ## Screenshots
 
 **Home Page Screen**
+![Noble-Turtles-app](https://user-images.githubusercontent.com/17565188/144707081-66a99dd6-e25d-40e8-a832-b03d782fe0dd.gif)
+
+**Bot Play and Reset**
+![Bot-Mode-Reset](https://user-images.githubusercontent.com/17565188/144707088-f07b01f5-15b5-4144-9600-b8b98233d484.gif)
+
+<!-- **Home Page Screen**
    ![image](https://user-images.githubusercontent.com/17565188/140895822-e5abac38-0e0b-4511-a4c8-68e6369af716.png)
  
 
@@ -53,7 +59,7 @@ Online version of the module can be found [here](https://noble-turtles-checkers.
    ![image](https://user-images.githubusercontent.com/17565188/140896069-c4eaa5aa-8315-4d14-98b7-07c876b41af0.png)
    
 **Rules Screen**
-   ![image](https://user-images.githubusercontent.com/17565188/140896195-15406319-c31a-4b37-993a-c47f82a3ee8b.png)
+   ![image](https://user-images.githubusercontent.com/17565188/140896195-15406319-c31a-4b37-993a-c47f82a3ee8b.png) -->
 
  
 
