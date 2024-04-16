@@ -1,6 +1,7 @@
 # noble-turtles-checkers
 
 ## Project Description
+-- College Project for master 2021 UMKC - Introduction to Algorithms
 Simple Checkers Application build on [React](https://github.com/facebook/create-react-app) with an [electron](https://github.com/electron/electron) distributable
 
 ## Firebase Version:
